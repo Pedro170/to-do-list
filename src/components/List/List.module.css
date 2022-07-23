@@ -1,0 +1,27 @@
+.containerList {
+  display: flex;
+  align-items: center;
+  column-gap: .5rem;
+  border-radius: .6rem;
+  background: #20212C;
+  margin-bottom: .6rem;
+  padding: .8rem;
+}
+
+.containerList input[type="checkbox"] {
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+}
+
+.containerList label {
+  color: ccc;
+}
+
+.containerList .checked {
+  text-decoration: line-through;
+}
+
+.containerList .unchecked {
+  text-decoration: initial;
+}

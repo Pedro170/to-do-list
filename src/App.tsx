@@ -1,26 +1,46 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Item } from './types/Item';
+import List from "./components/List/List";
+import AddTarefa from "./components/AddArea/AddTarefa";
+import "./App.css";
 
-function App() {
+const App = () => {
+  const [list, setList] = React.useState<Item[]>([]);
+
+  const handleAddTask = ( taskName: string ) => {
+    let newList = [ ...list ];
+    newList.push({
+      id: list.length + 1,
+      tarefa: taskName,
+      done: false,
+    });
+    setList( newList );
+  }
+
+  const handleTaskChange = ( id: number, done: boolean ) => {
+    let newList = [ ...list ];
+    for( let i in newList ) {
+      if( newList[i].id === id ) {
+        newList[i].done = done;
+      }
+    }
+    setList( newList )
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <section className="container">
+      <div className="area">
+        <h1 className="title">Lista de Tarefas</h1>
+        <AddTarefa onEnter={ handleAddTask } />
+        {
+          list.map((item, idx) => (
+            <List key={ idx } item={ item } onChange={ handleTaskChange } />
+          ))
+        }
+      </div>
+    </section>
   );
-}
+};
 
 export default App;
+
